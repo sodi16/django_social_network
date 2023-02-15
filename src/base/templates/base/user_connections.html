@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h2> {{ user.username }}'s Profil</h2><br>
+{% endblock %}
+{% block content %}
+<h2>CONNECTIONS</h2>
+   <p> {% for connection in user.connections.all %}</p>
+        <a href="{% url 'profil' connection.pk %}"> {{ connection.username }}</a>
+    {% empty %}
+        <p>You didn't connect to anyone. Search for user</p>
+    {% endfor %}
+{% endblock %}

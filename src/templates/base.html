@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"  href="{% static 'css/style.css %}">
+    {% block title %}
+        <title>World Network</title>
+    {% endblock %}
+</head>
+<body>
+<section id="blog">
+{% if user.is_authenticated %}
+    <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'profil' user.pk %}">Profil</a></li>
+      <li><a href="{% url 'connections' %}">Connections</a></li>
+      <li><a href="{% url 'messages' %}">Messages</a></li>
+      <li style="float:right"><form action="{% url 'search_user' %}" method="get"><input name="search" type="text"
+                                                                                          placeholder="Search for user">
+          {% csrf_token %}
+          <button type="submit">Search</button>
+        </form>
+      </li>
+    </ul>
+{% else %}
+    <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'login_page' %}">Login</a></li>
+      <li><a href="{% url 'register_page' %}">Register</a></li>
+    </ul>
+{% endif %}
+{% block content %}
+    <h1>Base of the social network</h1>
+{% endblock %}
+
+</section>
+    <div class="footer">
+       {% if user.is_authenticated %}
+           <div class="footer-content"> You are connected as: {{ request.user }}. <a href="{% url 'logout' %}">Disconnect</a></div>
+        {% endif %}
+    </div>
+</body>
+</html>

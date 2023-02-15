@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--   <p> {{ user.connections }}</p>-->
+   <p> {{ user.username }}</p>
+   <p> {% for connection in user.connections.all %}</p>
+   <p> {{ connection.username }}</p>
+   {% endfor %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if results %}
+        <h2>Founded {{ results|length }} results on your research</h2>
+        {% for user in results %}
+             <a href="{% url 'profil' user.pk %}"><p><img src="{{user.profil_picture.url}}" width="200" height="200"></p>
+               <p>{{ user.username }}</p></a>
+
+             <form method="post" action="{% url 'profil' user.pk %}">
+                 {% csrf_token %}
+                 <input type="submit" value="Connect" id="cone">
+             </form>
+        {% endfor %}
+    {% else %}
+        <p>No match founded on your research.</p>
+    {% endif %}
+{% endblock %}

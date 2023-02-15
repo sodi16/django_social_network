@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2> {{ user.username }}'s Profil</h2>
+<img src="{{ user.profil_picture.url }}" width="200" height="200"><br>
+<a href="{% url 'change_profilpic' %}">Change profil picture</a>
+<a>Connect</a>
+<br>
+<h2>CONNECTIONS</h2>
+   <p> {% for connection in user.connections.all %}</p>
+        <a href="{% url 'profil' connection.pk %}"> {{ connection.username }}</a>
+    {% empty %}
+        <p>You didn't connect to anyone. Search for users</p>
+    {% endfor %}
+
+<h2>POSTS</h2>
+    <div class="user_posts">
+    {% for post in user.posts.all %}
+        <a href="{% url 'profil' connection.pk %}"> {{ connection.username }}</a>
+    {% empty %}
+        <p>You didn't post anything</p>
+    {% endfor %}
+    </div>
+    <a href="{% url 'upload_post' %}">Post something</a>
+{% endblock %}

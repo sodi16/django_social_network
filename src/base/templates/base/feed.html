@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h2>Feed</h2>
+{% endblock %}
+<head>
+</head>
+{% block content %}
+    {% for post in posts %}
+        <div class="column">
+        <img src="{{ post.image.url }}" width="300" height="300">
+        <p> {{ post.title }}</p>
+        <p> {{ post.content }}</p>
+        </div>
+    {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}">last »</a>
+    {% endif %}
+    {% endfor %}
+{% endblock %}
